@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Proyecto React</title>
+    <script src="https://unpkg.com/react@latest/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@latest/dist/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+</head>
+<body>
+<h2>hello world</h2>
+<div id="marco"></div>
+
+<script type="text/babel">
+
+    class RenderComponent extends React.Component{
+        constructor(){
+            super();
+            this.state = {
+                number : 0
+            }
+        }
+        render(){
+            return(
+                <div>
+                    <h2>Texto desde componente</h2>
+                    <IntroducirTexto></IntroducirTexto>
+                    <AddAmount number={ this.state.number }></AddAmount>
+                </div>
+            )
+        }
+    }
+
+    class AddAmount extends React.Component{
+        render(){
+            return(
+                <div>{ this.props.number }</div>
+            );
+        }
+    }
+
+    class IntroducirTexto extends React.Component{
+        constructor(){
+            super();
+            this.state = {
+                nombre : 'Introducir nombre'
+            }
+        }
+
+        /**
+         * Change name to input
+         * @param event { object }
+         */
+        changeName( event ){
+            this.setState( { nombre : event.target.value } )
+        }
+
+        render(){
+            return(
+                <div>
+                    <h3>{ this.state.nombre }</h3>
+                    <input type="text" onChange={ this.changeName.bind( this ) }/>
+                </div>
+            )
+        }
+    }
+
+    ReactDOM.render(
+        <RenderComponent></RenderComponent>,
+        document.getElementById( "marco" )
+    );
+</script>
+</body>
+</html>
